@@ -1,0 +1,228 @@
+@import '../../../styles.scss';
+
+@mixin flex-one {
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+:host {
+  @include gray-background;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .selection {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      button {
+        font-family: 'VisbyRoundCF-Bold';
+        font-size: 1.325rem;
+        height: fit-content;
+        padding: 0.5rem 0.6rem;
+      }
+    }
+
+    .resize {
+      @include flex-center-center;
+      flex-direction: column;
+      width: 5rem;
+      gap: 0.2rem;
+
+      button {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-family: 'VisbyRoundCF-Regular';
+        font-size: 0.9375rem;
+      }
+    }
+  }
+}
+
+section.summary {
+  display: flex;
+  padding: 0 1rem 1rem 1rem;
+  gap: 1rem;
+
+  @include breakpoints(medium) {
+    flex-direction: column;
+  }
+
+  .total,
+  .icons {
+    @include white-bg-content;
+  }
+
+  .total {
+    flex: 2;
+    padding: 1rem;
+  }
+
+  .icons {
+    flex: 1;
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: repeat(6, 1fr);
+    align-content: center;
+    gap: 0.5rem;
+
+    li.icon {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.425rem;
+      cursor: pointer;
+
+      .bus-count {
+        @apply badge bg-red-600 text-white;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+      }
+
+      img {
+        &.active {
+          filter: saturate(1);
+        }
+
+        filter: saturate(0);
+        width: 3rem;
+        height: auto;
+      }
+
+      p {
+        text-align: center;
+        font-family: 'VisbyRoundCF-Regular';
+        font-size: 1rem;
+      }
+
+      @include breakpoints(medium) {
+        p {
+          font-size: 0.8rem;
+        }
+
+        img {
+          width: 2.5rem;
+        }
+      }
+    }
+  }
+}
+
+.buses {
+  @include gray-background;
+  // position: relative;
+  // padding: 0 1rem 1rem;
+  flex: 1;
+
+  .empty {
+    font-size: 2rem;
+    background-color: #{$gray}70;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+
+  .header {
+    @include flex-between-center;
+    margin: 0 2rem 1rem;
+
+    .name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      > span {
+        @include white-bg-content;
+        min-width: 18.75rem;
+        padding: 1rem;
+
+        h4 {
+          font-family: 'VisbyRoundCF-Bold';
+          font-size: 1.25rem;
+        }
+
+        p {
+          font-family: 'VisbyRoundCF-light';
+          font-size: 1.3125rem;
+        }
+      }
+    }
+
+    .options {
+      display: flex;
+      gap: 1rem;
+
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 0.325rem;
+      }
+    }
+  }
+}
+
+.list {
+  padding: 0 1rem 1rem;
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    // grid-template: repeat(2, 1fr) / repeat(4, 1fr);
+    gap: 0.8rem;
+    padding-bottom: 1rem;
+
+    &.max {
+      grid-template-columns: repeat(3, 1fr);
+
+      @include breakpoints(large) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include breakpoints(medium) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+
+    @include breakpoints(large) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+.pagination {
+  margin: 0 1rem;
+
+  ul {
+    display: flex;
+
+    li button {
+      padding: 0.7rem;
+      border-radius: 50%;
+      border: 2px solid $primary-blue;
+
+      &.active {
+        background-color: $primary-blue;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import '../../../../styles.scss';
+
+main {
+  @include modal-layout;
+}
+
+.modal {
+  .body {
+    .total {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      padding-bottom: 1rem;
+
+      &>div {
+        display: grid;
+        grid-template-columns: 14rem 1fr;
+
+        @include breakpoints(large) {
+          grid-template-columns: 2fr 1fr;
+        }
+      }
+    }
+  }
+}

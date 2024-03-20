@@ -1,0 +1,23 @@
+@import '../../../../styles.scss';
+
+main {
+  @include modal-layout;
+}
+
+app-statistics {
+  font-size: 1rem;
+}
+.modal-body {
+  position: relative;
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    em.em {
+      font-size: 10px;
+      color: #a5a5a5;
+    }
+  }
+}

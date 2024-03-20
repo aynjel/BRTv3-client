@@ -1,0 +1,102 @@
+$font-url: '../assets/fonts';
+
+// General Font
+@font-face {
+  font-family: 'VisbyCF-Medium';
+  src: url('#{$font-url}/VisbyCF/VisbyCF-Medium.otf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VisbyCF-Regular';
+  src: url('#{$font-url}/VisbyCF/VisbyCF-Regular.otf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VisbyCF-Bold';
+  src: url('#{$font-url}/VisbyCF/VisbyCF-Bold.otf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VisbyRoundCF-light';
+  src: url('#{$font-url}/VisbyRoundCF/VisbyRoundCF-Light.otf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VisbyRoundCF-Regular';
+  src: url('#{$font-url}/VisbyRoundCF/VisbyRoundCF-Regular.otf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VisbyRoundCF-DemiBold';
+  src: url('#{$font-url}/VisbyRoundCF/VisbyRoundCF-DemiBold.otf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VisbyRoundCF-Bold';
+  src: url('#{$font-url}/VisbyRoundCF/VisbyRoundCF-Bold.otf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+// Table Fonts
+@font-face {
+  font-family: 'ArticulatCF-Medium';
+  src: url('#{$font-url}/ArticulatCF/ArticulatCF-Medium.otf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ArticulatCF-Regular';
+  src: url('#{$font-url}/ArticulatCF/ArticulatCF-Regular.otf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ArticulatCF-Normal';
+  src: url('#{$font-url}/ArticulatCF/ArticulatCF-Normal.otf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ArticulatCF-DemiBold';
+  src: url('#{$font-url}/ArticulatCF/ArticulatCF-DemiBold.otf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+// TOP Bulletin
+@font-face {
+  font-family: 'Poppins-Light';
+  src: url('#{$font-url}/Poppins/Poppins-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('#{$font-url}/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: url('#{$font-url}/Poppins/Poppins-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}

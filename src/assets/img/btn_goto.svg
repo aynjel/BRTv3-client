@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
+  <g id="shape" transform="translate(-1610 -410)">
+    <path id="Bk_circle_bkgd" data-name="Bk circle bkgd" d="M1624.218,846.466a17.5,17.5,0,1,1,17.5-17.5,17.5,17.5,0,0,1-17.5,17.5Z" transform="translate(3.282 -401.466)" fill="#16bdd9"/>
+    <path id="Send_arrow_icon" data-name="Send arrow icon" d="M1636.722,836.466v1.161h6.341l-11.214,11.214.737.737,11.1-11.1v6.37h1.161v-8.383Z" transform="translate(-10.848 -415.522)" fill="#fff"/>
+  </g>
+</svg>

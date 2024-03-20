@@ -1,0 +1,148 @@
+<section class="print-section">
+  <div class="print-data">
+    <div class="print-header">
+      <div class="header-content">
+        <img [src]="companyLogo" alt="GoodKredit Logo" class="logo" />
+        <div class="header-details">
+          <p>
+            {{ currentDate | date : 'EEEE, MMMM d, y h:mm:ss a' }}
+          </p>
+          <p>
+            {{ busData.PAO }}
+          </p>
+        </div>
+      </div>
+      <div class="header-title">
+        <h1>Hourly Transaction Logs</h1>
+      </div>
+    </div>
+    <div class="print-body">
+      <div class="table-data-header">
+        <ul class="header-details">
+          <li>
+            <p>
+              IMEI: <span>{{ busData.IMEI || '-' }}</span>
+            </p>
+            <p>
+              Bus: <span>{{ busData.branchID || '-' }}</span>
+            </p>
+            <p>
+              Date:
+              <span>{{ (busData.txnDate | date : 'MMM d, yyyy') || '-' }}</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              Route: <span>{{ busData.routeCode || '-' }}</span>
+            </p>
+            <p>
+              PAO: <span>{{ busData.PAO || '-' }}</span>
+            </p>
+          </li>
+        </ul>
+        <ul class="transaction-summary">
+          <li *ngFor="let th of overallTransactionHeader">
+            <p>{{ th.label }}</p>
+            <ng-container *ngIf="th.currency || th.distance; else default">
+              <strong *ngIf="th.currency">
+                {{ th.value | currencyFormat }}
+              </strong>
+              <strong *ngIf="th.distance">
+                {{ th.value | decimalFormat }} km.
+              </strong>
+            </ng-container>
+            <ng-template #default>
+              <strong>{{ th.value }}</strong>
+            </ng-template>
+          </li>
+        </ul>
+      </div>
+      <table class="print-table">
+        <thead>
+          <tr>
+            <th>Transaction Hour</th>
+            <th>Station From</th>
+            <th>Transaction Count</th>
+            <th>Amount</th>
+            <th>Pax</th>
+            <th>CCTV Enter</th>
+            <th>CCTV Exit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of hourlyTransactionLogs">
+            <td>{{ data.txnHour | hour : data.txnDate : busData.txnDate }}</td>
+            <td>{{ data.stnFrom }}</td>
+            <td>{{ data.tranCount }}</td>
+            <td>{{ data.grossAmt | currencyFormat }}</td>
+            <td>{{ data.paxCount }}</td>
+            <td>{{ data.cctvEnter }}</td>
+            <td>{{ data.cctvExit }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- FOR PRINTING -->
+      <table class="print-table" id="hourly-transaction-logs" hidden>
+        <thead>
+          <tr>
+            <td [attr.colspan]="7">
+              <h2>Hourly Transaction Logs</h2>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2">
+              Date: {{ busData.txnDate | date : 'MMMM d, y' }}
+            </th>
+            <th colspan="3">Bus: {{ busData.branchID }}</th>
+          </tr>
+          <tr>
+            <th colspan="2">Route: {{ busData.routeCode }}</th>
+            <th colspan="3">IMEI: {{ busData.IMEI }}</th>
+          </tr>
+          <tr>
+            <th colspan="2">
+              Total List Record: {{ hourlyTransactionLogs.length }}
+            </th>
+            <th colspan="3">PAO: {{ busData.PAO }}</th>
+          </tr>
+          <tr></tr>
+          <tr>
+            <th>Transaction Hour</th>
+            <th>Station From</th>
+            <th>Transaction Count</th>
+            <th>Amount</th>
+            <th>Pax</th>
+            <th>CCTV Enter</th>
+            <th>CCTV Exit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of hourlyTransactionLogs">
+            <td>{{ data.txnHour | hour : data.txnDate : busData.txnDate }}</td>
+            <td>{{ data.stnFrom }}</td>
+            <td>{{ data.tranCount }}</td>
+            <td>{{ data.grossAmt | currencyFormat }}</td>
+            <td>{{ data.paxCount }}</td>
+            <td>{{ data.cctvEnter }}</td>
+            <td>{{ data.cctvExit }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="print-action">
+      <button class="btn-circle" title="Print" (click)="onPrint()">
+        <i class="fas fa-print"></i>
+      </button>
+      <button
+        class="btn-circle"
+        title="Export to Excel"
+        (click)="exportToExcel()"
+      >
+        <i class="fas fa-file-excel"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<app-toast></app-toast>

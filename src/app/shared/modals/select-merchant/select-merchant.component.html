@@ -1,0 +1,20 @@
+<dialog id="selectMerchant" class="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h4 class="title">Select Merchant</h4>
+      <form method="dialog" *ngIf="merchantData.merchantID">
+        <button class="btn-circle danger"><i class="fas fa-times"></i></button>
+      </form>
+    </div>
+    <div class="modal-body">
+      <select class="select" [(ngModel)]="currentMerchant" (ngModelChange)="onMerchantChange($event)">
+        <option ngValue="" disabled>Select Merchant</option>
+        <option *ngFor="let merchant of merchantList" [ngValue]="merchant">{{ merchant.merchantName }}</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <p [ngClass]="merchantClass">{{ merchantStatusMessage }}</p>
+      <button (click)="selectMerchant()" [disabled]="disableButton">Proceed</button>
+    </div>
+  </div>
+</dialog>

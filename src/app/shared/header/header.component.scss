@@ -1,0 +1,16 @@
+@media (max-width: 900px){
+    .mobile-menu{
+        display: flex;
+        align-items: center;
+    }
+    .header__logo{
+        display: none;
+    }
+    .header__nav{
+        display: none;
+    }
+}
+
+.hidden{
+    display: none;
+}

@@ -1,0 +1,110 @@
+.modal {
+  min-height: 80%;
+
+  &::backdrop {
+    background-color: #00000026;
+    backdrop-filter: blur(1rem);
+  }
+
+  &-box {
+    padding: 0;
+
+    &.medium {
+      max-width: 40vw;
+    }
+
+    &.large {
+      max-width: 60vw;
+    }
+  }
+
+  &::backdrop {
+    background-color: #00000026;
+    backdrop-filter: blur(1rem);
+  }
+
+  &-box {
+    &.medium {
+      max-width: 50rem;
+    }
+
+    &.large {
+      max-width: 70rem;
+    }
+  }
+
+  &-header {
+    @include flex-between-center;
+    @apply border-b border-b-slate-400;
+    font-family: 'ArticulatCF-Medium';
+    font-size: 1.3125rem;
+    padding-bottom: 0.6rem;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+    padding: 1rem;
+    // align-items: flex-start;
+
+    @include breakpoints(medium) {
+      flex-wrap: wrap;
+    }
+
+    .title {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+  }
+
+  &-body {
+    font-family: 'ArticulatCF-Regular';
+    padding: 1rem;
+
+    .transaction-data {
+      font-size: 1.2rem;
+      display: flex;
+      margin-bottom: 0.8rem;
+
+      &>* {
+        flex: 1;
+      }
+    }
+
+    .transaction-summary {
+      display: flex;
+      font-size: 1.125rem;
+      margin-bottom: 0.8rem;
+
+      &>div {
+        flex: 1;
+      }
+    }
+
+    .table-container {
+      table {
+        table-layout: fixed;
+      }
+
+      overflow: auto;
+      position: relative;
+      height: 50vh;
+    }
+  }
+
+  &-footer {
+    @apply border-t border-t-slate-400;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    z-index: 2;
+
+    button {
+      padding: 0.5rem 1.325rem;
+    }
+  }
+}

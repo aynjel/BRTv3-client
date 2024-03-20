@@ -1,0 +1,181 @@
+@import '../../../styles.scss';
+
+:host {
+  // @include gray-background;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+section.head {
+  margin: 0 5rem;
+  flex-direction: column;
+
+  @include breakpoints(large) {
+    margin: 0 2rem;
+  }
+
+  @include breakpoints(small) {
+    margin: 0 1rem;
+  }
+}
+
+.selection {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  gap: 0.5rem;
+  margin: auto;
+  margin-bottom: 1rem;
+  width: 100%;
+
+  @include breakpoints(medium) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoints(small) {
+    grid-template-columns: none;
+    // margin: 0;
+  }
+
+  .setup-item {
+    @include grid-border;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    height: 7.1875rem;
+
+    .space-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    p {
+      font-family: 'VisbyRoundCF-Regular';
+      font-size: 1.0625rem;
+      // white-space: break-spaces;
+
+      &.value {
+        font-family: 'ArticulatCF-Regular';
+        font-size: 2.375rem;
+        font-weight: bold;
+      }
+    }
+
+    &.selected {
+      background-color: $brt-button;
+
+      p:not(.value) {
+        font-family: 'VisbyRoundCF-DemiBold';
+      }
+    }
+  }
+}
+
+.search {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+
+  @include breakpoints(medium) {
+    flex-direction: column;
+  }
+
+  .text-input {
+    position: relative;
+    flex: 1;
+
+    input {
+      width: 100%;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 20px;
+      background-size: cover;
+      cursor: pointer;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 0.5rem;
+
+    button {
+      font-size: 1.2rem;
+      padding: 0.625rem 1.5rem;
+
+      &.register {
+        font-size: 1.125rem;
+        @apply bg-green-600 hover:bg-green-800 disabled:bg-gray-700;
+        text-transform: uppercase;
+
+        @include breakpoints(medium) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+section.table-container {
+  flex: 1;
+  position: relative;
+  margin: 0 6rem;
+  height: calc(100% - 35dvh);
+  overflow: auto;
+  margin-bottom: 1rem;
+
+  @include breakpoints(medium) {
+    margin: 0 1rem;
+  }
+
+  table {
+    table-layout: fixed;
+
+    tbody {
+      font-family: 'ArticulatCF-DemiBold';
+
+      tr {
+        font-size: 1.0625rem;
+
+        td {
+          padding: 0.6rem 1rem;
+
+          &.options {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+          }
+
+          p {
+            text-transform: capitalize;
+            padding: 0.5rem;
+            border-radius: 1.5rem;
+            color: #fff;
+
+            &.active {
+              @apply bg-green-600;
+            }
+
+            &.inactive {
+              @apply bg-red-600;
+            }
+          }
+
+          button {
+            font-size: 1rem;
+            padding: 0.7rem 1rem;
+            width: 6rem;
+          }
+        }
+      }
+    }
+  }
+}

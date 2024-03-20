@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+  <g id="shape" transform="translate(-1309.998 -410.148)">
+    <path id="Bk_circle_bkgd" data-name="Bk circle bkgd" d="M1321.668,834.175a13,13,0,1,1,13-13A13,13,0,0,1,1321.668,834.175Z" transform="translate(1.33 -398.027)" fill="#16bdd9"/>
+    <path id="Forward_icon" data-name="Forward icon" d="M11.67,5.647,6.158.134A.277.277,0,0,0,6.132.1.347.347,0,0,0,5.648.1L5.64.107h0L.1,5.645h0a.347.347,0,0,0,.491.491L5.885.845l5.293,5.293a.348.348,0,1,0,.492-.492Z" transform="translate(1326.119 417.17) rotate(90)" fill="#fff"/>
+  </g>
+</svg>

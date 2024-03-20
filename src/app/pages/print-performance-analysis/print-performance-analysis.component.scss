@@ -1,0 +1,133 @@
+.print-header {
+  &::before {
+    content: '';
+    background: #86bade;
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    z-index: 0;
+    clip-rule: inherit;
+    clip-path: ellipse(100% 35% at 100% 0%);
+  }
+
+  &::after {
+    content: '';
+    background: #86bade;
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    z-index: 0;
+    clip-rule: inherit;
+    clip-path: ellipse(100% 70% at 90% 0%);
+  }
+}
+
+.header-content {
+  .header-details {
+    z-index: 1;
+    justify-content: center !important;
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-shadow: 2px 2px 2px #fff;
+    }
+  }
+
+  img.logo {
+    z-index: 1;
+
+    width: 100px !important;
+  }
+}
+
+.print-body {
+  .performance-details {
+    margin-top: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+
+    .details-item {
+      .details-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+
+        .value {
+          width: calc(100% - 30%);
+          border-bottom: 1.5px solid #000;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .revenue-outlook {
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .revenue-outlook-details {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 30px;
+
+      .details-item {
+        font-size: 12px;
+
+        .details-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .label {
+            width: 70%;
+          }
+
+          .value {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .zreading-outlook {
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .zreading-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+
+      .zreading-item {
+        font-size: 12px;
+
+        border: 1px dashed #000;
+        padding: 20px;
+        .zreading-content {
+          p {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}

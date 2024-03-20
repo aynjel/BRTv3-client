@@ -1,0 +1,39 @@
+Common Page Component Variables:
+  - Fixed layout list (readonly)
+  - icon/image directory (readonly)
+  - list (depending on model/page)
+  - other variables (search variable, filter, etc...)
+  - API status message (optional)
+
+  If component calls API:
+    - API status message: string type
+    - make sure loading spinner component is present
+    - loading status = true
+    - error status = false
+
+    Error:
+      - give error message
+      - set error status to true
+      - do not set loading to false
+
+    Success:
+      - set loading status to false
+
+
+    PAYLOAD: {
+      headers: {
+
+      }
+
+      body: {
+
+      }
+    }
+
+    RESPONSE: {
+
+    }
+
+Handling API data:
+  - use a httpservice to handle all of the api calls
+  - encode then encrypt data to assign to payload

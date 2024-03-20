@@ -1,0 +1,145 @@
+<section class="print-section">
+  <div class="print-data">
+    <div class="print-header">
+      <div class="header-content">
+        <img [src]="companyLogo" alt="GoodKredit Logo" class="logo" />
+        <div class="header-details">
+          <p>
+            {{ currentDate | date : 'EEEE, MMMM d, y h:mm:ss a' }}
+          </p>
+          <p>
+            {{ busData.PAO }}
+          </p>
+        </div>
+      </div>
+      <div class="header-title">
+        <h1>CCTV HOURLY LOGS</h1>
+      </div>
+    </div>
+    <div class="print-body">
+      <div class="table-data-header">
+        <ul class="header-details">
+          <li>
+            <p>
+              DATE: <span>{{ busData.txnDate | date : 'MMMM d, y' }}</span>
+            </p>
+            <p>
+              BUS: <span>{{ busData.branchID }}</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              ROUTE: <span>{{ busData.routeCode }}</span>
+            </p>
+            <p>
+              IMEI: <span>{{ busData.IMEI }}</span>
+            </p>
+          </li>
+        </ul>
+
+        <ul class="transaction-summary">
+          <li *ngFor="let th of totalTransactionHeader">
+            <p>{{ th.label }}</p>
+            <ng-container *ngIf="th.currency || th.distance; else default">
+              <strong *ngIf="th.currency">
+                {{ th.value | currencyFormat }}
+              </strong>
+              <strong *ngIf="th.distance">
+                {{ th.value | decimalFormat }} km.
+              </strong>
+            </ng-container>
+            <ng-template #default>
+              <strong>{{ th.value }}</strong>
+            </ng-template>
+          </li>
+        </ul>
+      </div>
+      <table class="print-table">
+        <thead>
+          <tr>
+            <th>Transaction Hour</th>
+            <th>Transaction Count</th>
+            <th>Amount</th>
+            <th>Pax</th>
+            <th>CCTV Enter</th>
+            <th>CCTV Exit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of hourlyLogs">
+            <td>{{ log.txnHour | hour : log.txnDate : busData.txnDate }}</td>
+            <td>{{ log.tranCount }}</td>
+            <td>{{ log.grossAmt | currencyFormat }}</td>
+            <td>{{ log.paxCount }}</td>
+            <td>{{ log.cctvEnter }}</td>
+            <td>{{ log.cctvExit }}</td>
+          </tr>
+          <tr *ngIf="hourlyLogs.length === 0">
+            <td colspan="6" class="no-data">No data available</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- FOR PRINTING -->
+      <table class="print-table" id="cctv-hourly-logs" hidden>
+        <thead>
+          <tr>
+            <td [attr.colspan]="6">
+              <h2>CCTV HOURLY LOGS</h2>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2">
+              Date: {{ busData.txnDate | date : 'MMMM d, y' }}
+            </th>
+            <th colspan="3">Bus: {{ busData.branchID }}</th>
+          </tr>
+          <tr>
+            <th colspan="2">Route: {{ busData.routeCode }}</th>
+            <th colspan="3">IMEI: {{ busData.IMEI }}</th>
+          </tr>
+          <tr>
+            <th colspan="2">Total List Record: {{ hourlyLogs.length }}</th>
+            <th colspan="3">Prepared by: {{ busData.PAO }}</th>
+          </tr>
+          <tr></tr>
+          <tr>
+            <th>Transaction Hour</th>
+            <th>Transaction Count</th>
+            <th>Amount</th>
+            <th>Pax</th>
+            <th>CCTV Enter</th>
+            <th>CCTV Exit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of hourlyLogs">
+            <td>{{ log.txnHour | hour : log.txnDate : busData.txnDate }}</td>
+            <td>{{ log.tranCount }}</td>
+            <td>{{ log.grossAmt | currencyFormat }}</td>
+            <td>{{ log.paxCount }}</td>
+            <td>{{ log.cctvEnter }}</td>
+            <td>{{ log.cctvExit }}</td>
+          </tr>
+          <tr *ngIf="hourlyLogs.length === 0">
+            <td colspan="6" class="no-data">No data available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="print-action">
+    <button class="btn-circle" (click)="onPrint()" title="Print">
+      <i class="fas fa-print"></i>
+    </button>
+    <button
+      class="btn-circle"
+      (click)="exportToExcel()"
+      title="Export to Excel"
+    >
+      <i class="fas fa-file-excel"></i>
+    </button>
+  </div>
+</section>
+
+<app-toast></app-toast>

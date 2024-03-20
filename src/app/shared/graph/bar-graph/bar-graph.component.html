@@ -1,0 +1,5 @@
+<div class="container">
+  <app-loading-spinner *ngIf="isLoading || isError" [statusMessage]="statusMessage" [errorMessage]="errorMessage"
+    [isError]="isError"></app-loading-spinner>
+  <canvas baseChart [type]="chartType" [options]="chartOptions" [data]="chartData"></canvas>
+</div>

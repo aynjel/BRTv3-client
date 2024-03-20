@@ -1,0 +1,54 @@
+@import '../../../styles.scss';
+
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.625rem;
+  height: 100%;
+
+  @include breakpoints(xlarge) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  @include breakpoints(medium) {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+  }
+
+  .stat-item {
+    @include grid-border;
+    position: relative;
+    padding: 1rem;
+
+    img {
+      position: absolute;
+      top: 5%;
+      right: 3%;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+
+      p {
+        font-size: 1.875rem;
+
+        @include breakpoints(medium) {
+          // font-size: 1.875rem;
+        }
+
+        &.label {
+          font-size: 1.2rem;
+
+          @include breakpoints(medium) {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}

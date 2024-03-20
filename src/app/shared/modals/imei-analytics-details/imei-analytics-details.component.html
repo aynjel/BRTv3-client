@@ -1,0 +1,17 @@
+<dialog id="imeiDetails" class="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h4 class="title">IMEI Details</h4>
+      <form method="dialog">
+        <button class="btn-circle danger"><i class="fas fa-times"></i></button>
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="item" *ngFor="let item of labelDetails">
+        <div>{{ item.label }}</div>
+
+        <div>{{ item.value }}</div>
+      </div>
+    </div>
+  </div>
+</dialog>

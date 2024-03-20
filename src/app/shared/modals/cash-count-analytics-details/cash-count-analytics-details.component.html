@@ -1,0 +1,88 @@
+<dialog id="cashCountDetails" class="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h4 class="title">Add/View/Edit Entry</h4>
+      <form method="dialog">
+        <button class="btn-circle danger"><i class="fas fa-times"></i></button>
+      </form>
+    </div>
+    <form [formGroup]="dataEntryForm" (submit)="onSubmit()">
+      <div class="modal-body">
+        <label>
+          Date From
+          <input
+            type="text"
+            class="w-2/3"
+            formControlName="dateFrom"
+            readonly
+          />
+        </label>
+        <label>
+          <span> Time In <span class="text-red-600">*</span></span>
+          <input type="time" class="w-2/3" formControlName="timeIn" />
+        </label>
+        <label>
+          <span> Time Out <span class="text-red-600">*</span></span>
+          <input type="time" class="w-2/3" formControlName="timeOut" />
+        </label>
+        <label>
+          <span> IMEI <span class="text-red-600">*</span></span>
+          <input type="text" class="w-2/3" formControlName="IMEI" readonly />
+        </label>
+        <label>
+          <span> Bus Route <span class="text-red-600">*</span></span>
+          <input
+            type="text"
+            class="w-2/3"
+            formControlName="routeCode"
+            readonly
+          />
+        </label>
+        <label>
+          <span>
+            PAO <em class="em">(Separate by comma ,) </em>
+            <span class="text-red-600">*</span></span
+          >
+          <input type="text" class="w-2/3" formControlName="PAO" />
+        </label>
+        <label>
+          First Name
+          <input
+            type="text"
+            class="w-2/3"
+            formControlName="firstName"
+            readonly
+          />
+        </label>
+        <label>
+          Last Name
+          <input
+            type="text"
+            class="w-2/3"
+            formControlName="lastName"
+            readonly
+          />
+        </label>
+        <label>
+          <span> Odemeter Start <span class="text-red-600">*</span></span>
+          <input type="text" class="w-2/3" formControlName="odometerStart" />
+        </label>
+        <label>
+          <span> Odemeter End <span class="text-red-600">*</span></span>
+          <input type="text" class="w-2/3" formControlName="odometerEnd" />
+        </label>
+        <label>
+          <span> Fuel Consumption <span class="text-red-600">*</span></span>
+          <input type="text" class="w-2/3" formControlName="fuelConsumption" />
+        </label>
+        <label>
+          <span> Amount <span class="text-red-600">*</span></span>
+          <input type="text" class="w-2/3" formControlName="amount" />
+        </label>
+      </div>
+      <div class="modal-footer">
+        <button class="btn primary w-1/3 text-white" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</dialog>

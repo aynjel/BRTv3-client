@@ -1,0 +1,24 @@
+@import '../../../../styles.scss';
+
+.doughnut {
+  position: relative;
+  height: inherit;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+
+  .details {
+    flex: 0 0 7rem;
+    font-size: 1.125rem;
+    text-align: center;
+    line-height: 1.25;
+
+    .month {
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
+}

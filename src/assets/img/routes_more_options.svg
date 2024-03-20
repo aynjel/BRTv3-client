@@ -1,0 +1,9 @@
+<svg id="shape" xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52">
+  <rect id="area" width="52" height="52" fill="#16bdd9" opacity="0"/>
+  <g id="_2x2_circles_pattern" data-name="2x2 circles pattern" transform="translate(2.599 2.599)">
+    <circle id="Circle" cx="10" cy="10" r="10" transform="translate(26.401 0.401)" fill="#16bdd9"/>
+    <circle id="Circle-2" data-name="Circle" cx="10" cy="10" r="10" transform="translate(0.401 26.401)" fill="#16bdd9"/>
+    <circle id="Circle-3" data-name="Circle" cx="10" cy="10" r="10" transform="translate(0.401 0.401)" fill="#16bdd9"/>
+    <circle id="Circle-4" data-name="Circle" cx="10" cy="10" r="10" transform="translate(26.401 26.401)" fill="#16bdd9"/>
+  </g>
+</svg>

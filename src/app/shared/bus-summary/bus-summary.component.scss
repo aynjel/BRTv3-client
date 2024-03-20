@@ -1,0 +1,44 @@
+@import '../../../styles.scss';
+
+:host {
+  position: relative;
+}
+
+.header {
+  font-family: 'VisbyRoundCF-Bold';
+  font-size: 1.1625rem;
+  margin-bottom: 0.8rem;
+}
+
+.statistics {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.125rem;
+  gap: 0.4rem;
+
+  @include breakpoints(large) {
+    flex-direction: column;
+  }
+
+  .bus-stats {
+    flex: 1;
+    display: grid;
+
+    .detail {
+      display: flex;
+      align-items: center;
+      margin: 0 0.5rem;
+
+      &-label {
+        font-family: 'VisbyRoundCF-Regular';
+        flex: 2;
+      }
+
+      &-data {
+        font-family: 'VisbyRoundCF-DemiBold';
+        flex: 1;
+      }
+    }
+  }
+}

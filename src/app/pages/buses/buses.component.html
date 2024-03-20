@@ -1,0 +1,194 @@
+<section class="head">
+  <div class="main">
+    <div class="navigate">
+      <button (click)="returnToDashboard()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <p>
+        {{ busType }} Buses
+        <span *ngIf="busCount">| {{ busCount | numberFormat }}</span>
+      </p>
+    </div>
+  </div>
+  <div class="options">
+    <div class="selection">
+      <button (click)="toggleAll(true)">Select All</button>
+      <button (click)="toggleAll(false)">Deselect All</button>
+      <button class="btn-circle" (click)="getBuses()">
+        <i class="fas fa-sync-alt"></i>
+      </button>
+    </div>
+    <div class="resize">
+      <button *ngIf="!maximize" (click)="resizeBuses()" class="btn-circle">
+        <i class="fas fa-expand"></i>
+      </button>
+      <button *ngIf="maximize" (click)="resizeBuses()" class="btn-circle">
+        <i class="fas fa-compress"></i>
+      </button>
+      <!-- <p>{{ maximize ? 'Minimize' : 'Maximize' }}</p> -->
+    </div>
+    <div class="date">
+      <p>{{ date | date : 'MMMM d, yyyy' }}</p>
+    </div>
+  </div>
+</section>
+<section class="summary">
+  <div class="total">
+    <app-bus-summary
+      [busRoutes]="busRoutes"
+      [updateList]="updateSummary()"
+    ></app-bus-summary>
+  </div>
+  <ul class="icons">
+    <li
+      *ngFor="let category of busCategory"
+      class="icon"
+      (click)="filterBusColor(category.key)"
+    >
+      <div
+        class="bus-count"
+        *ngIf="category.count && selectBusCategory(category.key)"
+      >
+        <p>{{ category.count }}</p>
+      </div>
+      <img
+        [src]="category.path"
+        [alt]="category.name"
+        [class.active]="selectBusCategory(category.key)"
+      />
+      <p>{{ category.name }}</p>
+    </li>
+  </ul>
+</section>
+<section class="buses">
+  <app-loading-spinner
+    *ngIf="isLoading || isError"
+    [isError]="isError"
+    [statusMessage]="statusMessage"
+    [errorMessage]="errorMessage"
+  ></app-loading-spinner>
+  <ul>
+    <li *ngFor="let route of busRoutes; index as i" class="route">
+      <div class="header">
+        <div class="name">
+          <span>
+            <h4>{{ route.routeCode || 'No Route' }}</h4>
+            <p>{{ route.routeName || '-' }}</p>
+          </span>
+          <label for="{{ i }}-checkbox">
+            <input
+              id="{{ i }}-checkbox"
+              type="checkbox"
+              [checked]="route.checked"
+              (change)="toggleRoute(route)"
+              [indeterminate]="route.indeterminate"
+            />
+          </label>
+        </div>
+        <div class="options">
+          <div>
+            <button
+              (click)="routesPageRedirect(route.routeCode)"
+              class="btn-circle"
+            >
+              <i class="far fa-list-alt"></i>
+            </button>
+            <p>View Details</p>
+          </div>
+        </div>
+      </div>
+      <div class="list">
+        <ul [class.max]="maximize">
+          <li
+            *ngFor="let bus of paginatedBuses(i); index as j"
+            class="bus-list"
+          >
+            <app-bus-card
+              [busDetails]="bus"
+              [maximize]="maximize"
+              (busCount)="getBusColor($event)"
+
+            ></app-bus-card>
+            <div class="menu">
+              <input
+                type="checkbox"
+                [checked]="bus.checked"
+                class="form-check"
+                (change)="toggleBus(bus)"
+              />
+              <button (click)="openCashCountDetails(bus)">
+                <i class="far fa-plus-square"></i>
+              </button>
+
+              <details
+                class="dropdown"
+                (click)="openBusDetails(bus)"
+                id="detail-{{ bus.ID }}"
+              >
+                <summary>
+                  <i class="fas fa-eye"></i>
+                </summary>
+                <ul class="dropdown-content z-[1]" id="dropdown-{{ bus.ID }}">
+                  <ng-template #busDetails></ng-template>
+                </ul>
+              </details>
+
+              <div class="dropdown dropdown-end">
+                <button tabindex="0" role="button">
+                  <img [src]="receipts" />
+                </button>
+                <ul tabindex="0" class="dropdown-content z-[1] menu">
+                  <li
+                    *ngFor="let option of transactionOptions"
+                    (click)="openLogs(option.modalId, bus)"
+                  >
+                    {{ option.name }}
+                  </li>
+                  <li (click)="openPreviousDays()">
+                    Last 30 Days (Outlet, IMEI, Route)
+                  </li>
+                  <li (click)="openPreviousDays('IMEI')">
+                    Last 30 Days (IMEI)
+                  </li>
+                  <li (click)="openPreviousDays('PAO')" *ngIf="bus.PAO">
+                    Last 30 Days (PAO)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="pagination" *ngIf="routePagination[i].totalPages > 1">
+          <ul>
+            <li
+              *ngFor="
+                let page of getPages(routePagination[i].totalPages);
+                index as j
+              "
+            >
+              <button
+                (click)="changePage(i, j)"
+                [class.active]="activePage(i, j)"
+              ></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<app-transaction-logs
+  [busData]="selectedBusData?.transactions"
+></app-transaction-logs>
+<app-zreading-logs [busData]="selectedBusData?.zreading"></app-zreading-logs>
+<app-cctv-hourly [busData]="selectedBusData?.cctvHourly"></app-cctv-hourly>
+<app-hourly-summary
+  [busData]="selectedBusData?.hourlySummary"
+></app-hourly-summary>
+<app-performance-analysis
+  [busData]="selectedBusData?.analysis"
+></app-performance-analysis>
+<app-cash-count-analytics-details
+  [cashCountDetails]="cashCountDetails"
+></app-cash-count-analytics-details>

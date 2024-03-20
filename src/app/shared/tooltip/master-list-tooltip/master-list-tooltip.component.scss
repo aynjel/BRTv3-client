@@ -1,0 +1,21 @@
+@import '../../../../styles.scss';
+
+.container {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: 0.415rem;
+  width: 28rem;
+
+  .span {
+    grid-column: span 2;
+  }
+
+  .label {
+    color: black
+  }
+
+  .data {
+    color: $primary-blue;
+    font-size: 0.925rem;
+  }
+}

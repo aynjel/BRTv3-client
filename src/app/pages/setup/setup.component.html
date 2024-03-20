@@ -1,0 +1,217 @@
+<section class="head">
+  <ul class="selection">
+    <li
+      *ngFor="let select of setupSelection"
+      class="setup-item"
+      [class.selected]="selectedSetupTable.type === select.type"
+      (click)="selectSetup(select.type)"
+    >
+      <div class="space-between">
+        <p class="value">{{ +select.value | numberFormat }}</p>
+        <img [src]="select.imgUrl" />
+      </div>
+      <p>{{ select.name }}</p>
+    </li>
+  </ul>
+  <div class="search">
+    <label class="text-input">
+      <input
+        type="text"
+        placeholder="Search {{ selectedSetupTable.type }}"
+        [(ngModel)]="searchSetup"
+        (input)="filterData()"
+        [disabled]="isLoading"
+      />
+      <div class="search-icon"><i class="fas fa-search"></i></div>
+    </label>
+    <div class="buttons">
+      <button
+        class="register"
+        (click)="add(selectedSetupTable.type)"
+        [disabled]="isLoading"
+      >
+        Register {{ selectedSetupTable.type }}
+      </button>
+      <button
+        (click)="onPrint()"
+        [disabled]="isLoading || isError"
+        title="Print"
+      >
+        <img [src]="printerIcon" />
+      </button>
+      <button (click)="getSetupData()"><i class="fas fa-sync-alt"></i></button>
+    </div>
+  </div>
+</section>
+<section class="table-container">
+  <app-loading-spinner
+    *ngIf="isLoading || isError"
+    [isError]="isError"
+    [statusMessage]="statusMessage"
+    [errorMessage]="errorMessage"
+  ></app-loading-spinner>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let header of selectedSetupTable.headers">
+          {{ header }}
+        </th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody [ngSwitch]="selectedSetupTable.type">
+      <ng-container *ngSwitchCase="'PAO'">
+        <tr *ngFor="let PAO of filteredSetupList['PAO']">
+          <td>{{ PAO.dateTimeIn | date : 'dd MMM yyyy' }}</td>
+          <td style="text-align: left">
+            {{ PAO.lastName }}, {{ PAO.firstName }} {{ PAO.middleName }}
+          </td>
+          <td>{{ PAO.license || '-' }}</td>
+          <td class="text-center">
+            <p [ngClass]="identifyStatus(PAO.status)">{{ PAO.status }}</p>
+          </td>
+          <td class="options">
+            <button (click)="edit(selectedSetupTable.type, PAO)">View</button>
+            <button
+              class="danger"
+              (click)="remove(selectedSetupTable.type, PAO)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+        <ng-container *ngIf="!isLoading">
+          <tr *ngIf="!filteredSetupList['PAO'].length" class="text-center">
+            <td [colSpan]="selectedSetupTable.headers.length + 1">Not Found</td>
+          </tr>
+          <tr *ngIf="!mainSetupList$.getValue().PAO.length" class="text-center">
+            <td [colSpan]="selectedSetupTable.headers.length + 1">No Data</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'Driver'">
+        <tr *ngFor="let driver of filteredSetupList['Driver']">
+          <td>{{ driver.dateTimeIn | date : 'dd MMM yyyy' }}</td>
+          <td style="text-align: left">
+            {{ driver.lastName }}, {{ driver.firstName }}
+            {{ driver.middleName }}
+          </td>
+          <td>{{ driver.license || '-' }}</td>
+          <td class="text-center">
+            <p [ngClass]="identifyStatus(driver.status)">{{ driver.status }}</p>
+          </td>
+          <td class="options">
+            <button (click)="edit(selectedSetupTable.type, driver)">
+              View
+            </button>
+            <button
+              class="danger"
+              (click)="remove(selectedSetupTable.type, driver)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+        <ng-container *ngIf="!isLoading">
+          <tr *ngIf="!filteredSetupList['Driver'].length" class="text-center">
+            <td [colSpan]="selectedSetupTable.headers.length + 1">Not Found</td>
+          </tr>
+          <tr
+            *ngIf="!mainSetupList$.getValue().Driver.length"
+            class="text-center"
+          >
+            <td [colSpan]="selectedSetupTable.headers.length + 1">No Data</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'IMEI'">
+        <tr *ngFor="let imei of filteredSetupList['IMEI']">
+          <td>{{ imei.dateTimeIn | date : 'dd MMM yyyy' }}</td>
+          <td style="text-align: left">{{ imei.IMEI }}</td>
+          <td class="text-center">
+            <p [ngClass]="identifyStatus(imei.status)">{{ imei.status }}</p>
+          </td>
+          <td class="options">
+            <button (click)="edit(selectedSetupTable.type, imei)">View</button>
+            <button
+              class="danger"
+              (click)="remove(selectedSetupTable.type, imei)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+        <ng-container *ngIf="!isLoading">
+          <tr *ngIf="!filteredSetupList['IMEI'].length" class="text-center">
+            <td [colSpan]="selectedSetupTable.headers.length + 1">Not Found</td>
+          </tr>
+          <tr
+            *ngIf="!mainSetupList$.getValue().IMEI.length"
+            class="text-center"
+          >
+            <td [colSpan]="selectedSetupTable.headers.length + 1">No Data</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'Routes'">
+        <tr *ngFor="let fare of filteredSetupList['Routes']">
+          <!-- <td>{{ fare.dateTimeIn | date: 'dd MMM yyyy' }}</td> -->
+          <td>{{ fare.routeCode }}</td>
+          <td>{{ fare.minFare | currencyFormat }}</td>
+          <td class="options">
+            <button (click)="edit(selectedSetupTable.type, fare)">View</button>
+            <button
+              class="danger"
+              (click)="remove(selectedSetupTable.type, fare)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+        <tr
+          *ngIf="!mainSetupList$.getValue().Routes.length"
+          class="text-center"
+        >
+          <td [colSpan]="selectedSetupTable.headers.length + 1">No Data</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</section>
+<app-add-personnel
+  [personnelType]="personnelType"
+  (added)="getSetupData()"
+></app-add-personnel>
+<app-edit-personnel
+  [personnelType]="personnelType"
+  [personnelData]="setupData"
+  (updated)="getSetupData()"
+></app-edit-personnel>
+<app-remove-personnel
+  [personnelType]="personnelType"
+  [personnelData]="setupData"
+  (removed)="getSetupData()"
+></app-remove-personnel>
+
+<app-add-imei
+  (added)="getSetupData()"
+  [existingIMEI]="mainSetupList$.getValue().IMEI"
+></app-add-imei>
+<app-edit-imei
+  [imeiData]="setupData"
+  (updated)="getSetupData()"
+></app-edit-imei>
+<app-remove-imei
+  [imeiData]="setupData"
+  (removed)="getSetupData()"
+></app-remove-imei>
+
+<app-add-route></app-add-route>
+<app-edit-route></app-edit-route>
+<app-remove-route></app-remove-route>
+
+<app-add-merhant></app-add-merhant>
+<app-edit-merhant></app-edit-merhant>

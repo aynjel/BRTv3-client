@@ -1,0 +1,93 @@
+button,
+button[type='button'],
+input[type='button'] {
+  @apply text-white bg-sky-400 transition hover:bg-sky-700;
+  font-family: 'VisbyRoundCF-Bold';
+  border-radius: 0.9375rem;
+  position: relative;
+  border: none;
+  outline: none;
+
+  &[type='submit'] {
+    @apply bg-green-700 hover:bg-green-900;
+  }
+
+  &.reset {
+    @apply bg-yellow-400 hover:bg-yellow-600;
+  }
+
+  &.danger {
+    @apply bg-red-700 hover:bg-red-900;
+  }
+
+  &:disabled {
+    @apply bg-gray-500 hover:bg-gray-600;
+  }
+}
+
+button.modal-close-btn {
+  position: absolute;
+  padding: 2rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  background-color: $brt-button-red;
+  color: white;
+
+  top: 2vh;
+  right: 1rem;
+
+  &:hover {
+    i {
+      color: #000;
+    }
+  }
+
+  i {
+    position: absolute;
+    transform: translate(-50%, -55%);
+  }
+}
+
+.btn-circle {
+  @include btn-circle;
+  outline: none;
+
+  &.danger {
+    @apply text-white bg-red-700 transition hover:bg-red-900;
+  }
+}
+
+.btn-group {
+  font-family: 'VisbyRoundCF-Bold';
+  position: relative;
+  border: none;
+  outline: none;
+  display: flex;
+
+  label {
+    @apply text-white bg-sky-400 transition hover:bg-sky-700;
+    display: inline-block;
+    padding: 0.5rem;
+    flex: 1;
+    cursor: pointer;
+    text-align: center;
+
+    &:first-of-type {
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+    }
+
+    &:last-of-type {
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+  }
+
+  input[type="radio"] {
+    display: none;
+
+    &:checked+label {
+      @apply bg-sky-800;
+    }
+  }
+}

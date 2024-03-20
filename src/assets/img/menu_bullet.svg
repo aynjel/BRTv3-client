@@ -1,0 +1,8 @@
+<svg id="bullet-list-line" xmlns="http://www.w3.org/2000/svg" width="25.796" height="14.264" viewBox="0 0 25.796 14.264">
+  <ellipse id="Ellipse_9" data-name="Ellipse 9" cx="1.766" cy="1.426" rx="1.766" ry="1.426" transform="translate(0 0)" fill="#104a69"/>
+  <ellipse id="Ellipse_10" data-name="Ellipse 10" cx="1.766" cy="1.426" rx="1.766" ry="1.426" transform="translate(0 5.706)" fill="#104a69"/>
+  <ellipse id="Ellipse_11" data-name="Ellipse 11" cx="1.766" cy="1.426" rx="1.766" ry="1.426" transform="translate(0 11.411)" fill="#104a69"/>
+  <path id="Path_37" data-name="Path 37" d="M73.1,43.353a.812.812,0,0,0-.883-.713H53.3v1.426H72.217a.812.812,0,0,0,.883-.713Z" transform="translate(-47.304 -42.048)" fill="#104a69"/>
+  <path id="Path_38" data-name="Path 38" d="M72.217,85.28H53.3v1.426H72.217a.73.73,0,1,0,0-1.426Z" transform="translate(-47.304 -78.983)" fill="#104a69"/>
+  <path id="Path_39" data-name="Path 39" d="M72.217,127.92H53.3v1.426H72.217a.73.73,0,1,0,0-1.426Z" transform="translate(-47.304 -115.917)" fill="#104a69"/>
+</svg>

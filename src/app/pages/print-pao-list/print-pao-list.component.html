@@ -1,0 +1,99 @@
+<section class="print-section">
+  <div class="print-data">
+    <div class="print-header">
+      <div class="header-content">
+        <img [src]="companyLogo" alt="GoodKredit Logo" class="logo" />
+        <div class="header-details">
+          <p>
+            {{ currentDate | date : 'EEEE, MMMM d, y h:mm:ss a' }}
+          </p>
+          <p>John Doe</p>
+        </div>
+      </div>
+      <div class="header-title">
+        <h1>PAO REPORT</h1>
+      </div>
+    </div>
+    <div class="print-body">
+      <table class="print-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th *ngFor="let th of tableHeaders">
+              {{ th }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let td of tableData; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ td.dateTimeIn | date : 'MMM d, y h:mm a' || '-' }}</td>
+            <td>{{ td.lastName }}, {{ td.firstName }} {{ td.middleName }}</td>
+            <td>{{ td.license || '-' }}</td>
+            <td>{{ td.status || '-' }}</td>
+          </tr>
+          <tr *ngIf="tableData.length === 0">
+            <td [attr.colspan]="tableHeaders.length + 1">No data available</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- FOR PRINTING -->
+      <table class="print-table" id="pao-table" hidden>
+        <thead>
+          <tr>
+            <td [attr.colspan]="tableHeaders.length + 1">
+              <h2>PAO LIST</h2>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2">Date: {{ currentDate | date : 'MMM d, y' }}</th>
+            <th colspan="3">PAO: John Doe</th>
+          </tr>
+          <tr>
+            <th [attr.colspan]="tableHeaders.length + 1">
+              Total: {{ tableData.length }}
+            </th>
+          </tr>
+          <tr></tr>
+          <tr>
+            <th *ngFor="let th of tableHeaders">
+              {{ th }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let td of tableData; let i = index">
+            <td>{{ td.dateTimeIn | date : 'MMM d, y h:mm a' || '-' }}</td>
+            <td>{{ td.lastName }}, {{ td.firstName }} {{ td.middleName }}</td>
+            <td>{{ td.license || '-' }}</td>
+            <td>{{ td.status || '-' }}</td>
+          </tr>
+          <tr *ngIf="tableData.length === 0">
+            <td [attr.colspan]="tableHeaders.length + 1">No data available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="print-action">
+    <button
+      class="btn-circle"
+      (click)="onPrint()"
+      title="Print"
+      [disabled]="tableData.length === 0"
+    >
+      <i class="fas fa-print"></i>
+    </button>
+    <button
+      class="btn-circle"
+      (click)="exportToExcel()"
+      title="Export to Excel"
+      [disabled]="tableData.length === 0"
+    >
+      <i class="fas fa-file-excel"></i>
+    </button>
+  </div>
+</section>
+
+<app-toast></app-toast>

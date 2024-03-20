@@ -1,0 +1,38 @@
+.tooltip {
+  width: 50rem;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &>div {
+    flex: 1;
+  }
+
+  .status {
+    gap: 0.5rem;
+    display: flex;
+
+    .map {
+      flex: 1;
+    }
+
+    .bar {
+      flex: 2;
+    }
+  }
+
+  .line {
+    width: 100%;
+  }
+}
+
+.tooltip {
+
+  .status>div,
+  .line {
+    background-color: #fff;
+    padding: 0.825rem;
+    border-radius: 0.5rem;
+  }
+}

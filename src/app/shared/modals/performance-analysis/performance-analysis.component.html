@@ -1,0 +1,199 @@
+<dialog id="analysis" class="modal">
+  <div class="modal-box large">
+    <div class="modal-header">
+      <h4 class="title">Performance Analysis</h4>
+      <form method="dialog">
+        <button class="btn-circle danger"><i class="fas fa-times"></i></button>
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="header">
+        <div>
+          <h3>Bus:</h3>
+          <strong>{{ busData?.branchID || '-' }}</strong>
+        </div>
+        <div>
+          <h3>PAO:</h3>
+          <strong>{{ busData?.PAO || '-' }}</strong>
+        </div>
+        <div>
+          <h3>IMEI:</h3>
+          <strong>{{ busData?.IMEI || '-' }}</strong>
+        </div>
+        <div>
+          <h3>Date:</h3>
+          <strong>{{
+            (busData?.txnDate | date : 'MMM d, yyyy') || '-'
+          }}</strong>
+        </div>
+      </div>
+      <div class="content">
+        <div class="zreadings">
+          <h4 class="title">
+            Zreading Logs: {{ totalZreading | numberFormat }}
+          </h4>
+          <div class="zreadings-total">
+            <div>
+              <p>Cash Count:</p>
+              <p>{{ total.cashCount | currencyFormat }}</p>
+            </div>
+            <div>
+              <p>Net Amount:</p>
+              <p>{{ total.netAmt | currencyFormat }}</p>
+            </div>
+            <div>
+              <p>Difference:</p>
+              <p>
+                {{ total.difference | currencyFormat }}
+                <span>{{
+                  total.difference < -1
+                    ? '(Shortage)'
+                    : total.difference > 1
+                    ? '(Excess)'
+                    : ''
+                }}</span>
+              </p>
+            </div>
+          </div>
+          <div class="zreadings-list">
+            <app-loading-spinner
+              *ngIf="isLoading || isError"
+              [statusMessage]="statusMessage"
+              [errorMessage]="errorMessage"
+              [isError]="isError"
+            ></app-loading-spinner>
+            <div
+              class="zreading"
+              *ngFor="let zreading of zreadingLogs; index as i"
+            >
+              <div>
+                <p>
+                  <strong>[{{ i + 1 }}]</strong> ID:
+                </p>
+                <p>{{ zreading.txnID }}</p>
+              </div>
+              <div>
+                <p>Sync Date:</p>
+                <p>{{ zreading.dateTimeIN | date : 'MMM d hh:mm a' }}</p>
+              </div>
+              <div>
+                <p>Transact Date:</p>
+                <p>{{ zreading.TxnDateTime | date : 'MMM d hh:mm a' }}</p>
+              </div>
+              <div>
+                <p>Cash Count:</p>
+                <p>{{ zreading.cashCount | currencyFormat }}</p>
+              </div>
+              <div>
+                <p>Net Amount:</p>
+                <p>{{ zreading.NetAmount | currencyFormat }}</p>
+              </div>
+              <div>
+                <p>Difference:</p>
+                <p>
+                  {{
+                    zreading.cashCount - zreading.NetAmount | currencyFormat
+                  }}
+                  <span>{{
+                    '' | difference : zreading.cashCount : zreading.NetAmount
+                  }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="line"></span>
+        <div class="outlook">
+          <h4 class="title">Revenue Outlook</h4>
+          <div class="outlook-options">
+            <div class="buttons">
+              <div class="btn-group">
+                <ng-container *ngFor="let select of settings.cctvSelect">
+                  <input
+                    [id]="select.key"
+                    type="radio"
+                    name="options"
+                    [checked]="select.key === selectedCctv.key"
+                    (click)="selectCctv(select)"
+                  />
+                  <label [for]="select.key">{{ select.name }}</label>
+                </ng-container>
+              </div>
+              <div class="config">
+                <button class="btn-circle reset" (click)="restoreDefaults()">
+                  <i class="fas fa-undo"></i>
+                </button>
+                <button
+                  class="btn-circle"
+                  type="submit"
+                  (click)="applyChanges()"
+                >
+                  <i class="fas fa-check"></i>
+                </button>
+                <button class="btn-circle" (click)="onPrint()">
+                  <i class="fas fa-print"></i>
+                </button>
+              </div>
+            </div>
+            <div>
+              <p>
+                CCTV Count <i>({{ selectedCctv.name }})</i>
+              </p>
+              <p>{{ selectedCctv.value | numberFormat }}</p>
+            </div>
+            <div>
+              <p>POS Passengers</p>
+              <p>{{ busData?.totalPass | numberFormat }}</p>
+            </div>
+            <div>
+              <p>Accuracy</p>
+              <select [(ngModel)]="settings.accuracy">
+                <option *ngFor="let percent of percentages" [value]="percent">
+                  {{ percent }}%
+                </option>
+              </select>
+            </div>
+            <div>
+              <p>PAO Enter Accuracy</p>
+              <select [(ngModel)]="settings.paoEnterCount">
+                <option *ngFor="let percent of percentages" [value]="percent">
+                  {{ percent }}%
+                </option>
+              </select>
+            </div>
+            <div>
+              <p>Minimum Fare</p>
+              <input
+                type="text"
+                [(ngModel)]="settings.minFare"
+                [placeholder]="'Default: ' + (defaultMinFare | currencyFormat)"
+              />
+            </div>
+          </div>
+          <div class="outlook-report">
+            <h4>Report</h4>
+            <ng-container *ngFor="let report of reportList; index as i">
+              <div>
+                <p>{{ report.label }}</p>
+                <p>
+                  {{
+                    report.currency
+                      ? (report.value | currencyFormat)
+                      : report.percent
+                      ? (report.value | decimalFormat) + '%'
+                      : (report.value | numberFormat)
+                  }}
+                </p>
+              </div>
+              <hr *ngIf="(i + 1) % 2 === 0" />
+            </ng-container>
+            <div class="results">
+              <strong>Probable Revenue Leak (Est.) </strong>
+              <strong>{{ revenueLeak | currencyFormat }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>

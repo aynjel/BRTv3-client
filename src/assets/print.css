@@ -1,0 +1,70 @@
+/*
+* Print
+*/
+
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  .print-data {
+    background: #fff;
+    min-height: 100vh;
+    padding: 40px 30px;
+  }
+
+  .print-data .print-header .header-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .print-data > .print-header > .header-content > img.logo {
+    width: 160px;
+  }
+
+  .print-data > .print-header > .header-content > .header-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .print-data > .print-header > .header-content > .header-details > p {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .print-data > .print-header > .header-content > .header-title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .print-body > .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e1e1e1;
+  }
+
+  .print-body > .print-table > tbody > tr {
+    border: 1px solid #e1e1e1;
+  }
+
+  .print-body > .print-table > thead > tr > th {
+    position: static;
+    background: #fff;
+    color: #313942;
+    font-weight: 400;
+    border-radius: 0;
+    font-size: 14px;
+    padding: 0 5px;
+  }
+
+  .print-body > .print-table > thead > tr > th,
+  .print-body > .print-table > tbody > tr > td {
+    text-align: left;
+    font-size: 10px;
+  }
+}

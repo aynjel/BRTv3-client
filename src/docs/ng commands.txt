@@ -1,0 +1,14 @@
+ADD MODULE AND IMPORT TO ROUTES:
+  - ng g module modules/<module_name> --route <route_name> --module app.module
+
+CREATE SHARED COMPONENT:
+  - ng g c shared/<component_name>
+
+CREATE PAGE:
+  - ng g c pages/<page_name>
+
+CREATE SERVICE:
+  - ng g s services/<service_name>
+
+CREATE PIPE:
+  - ng g p pipes/<pipe_name>

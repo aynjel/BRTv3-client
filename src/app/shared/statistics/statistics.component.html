@@ -1,0 +1,11 @@
+<div class="statistics-grid">
+  <div class="stat-item" *ngFor="let item of statItem">
+    <app-loading-spinner [isError]="isError" [errorMessage]="errorMessage"
+      *ngIf="isLoading || isError"></app-loading-spinner>
+    <img [src]="item.imgUrl" [alt]="item.label" />
+    <div class="details">
+      <p>{{ item.currency ? (item.value | currencyFormat) : (item.value | numberFormat) }}</p>
+      <p class="label">{{ item.label }}</p>
+    </div>
+  </div>
+</div>

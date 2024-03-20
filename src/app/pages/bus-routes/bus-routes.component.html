@@ -1,0 +1,88 @@
+<section class="head">
+  <div class="main">
+    <div class="navigate">
+      <button (click)="goback()"><i class="fas fa-chevron-left"></i></button>
+      <p>Bus Routes</p>
+    </div>
+    <ul class="icons">
+      <li *ngFor="let icon of busIcons">
+        <img [src]="icon.path" [alt]="icon.name" />
+        <p>{{ icon.name }}</p>
+      </li>
+      <li>
+        <button class="btn-circle" (click)="getRoutes()">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="date">
+    <p>{{ date | date : 'MMMM d, yyyy' }}</p>
+  </div>
+</section>
+<section class="bus-routes">
+  <app-loading-spinner *ngIf="isLoading" [isError]="isError" [statusMessage]="statusMessage"
+    [errorMessage]="errorMessage"></app-loading-spinner>
+  <ul>
+    <li *ngFor="let route of busRoutes; index as i" class="route">
+      <div class="header">
+        <div class="detail">
+          <div class="count">
+            <p>{{ route.totalBusCount }}</p>
+            <img [src]="busCountIcon" />
+          </div>
+          <div class="name">
+            <h3>{{ route.routeCode }}</h3>
+            <p>{{ route.routeName }}</p>
+          </div>
+        </div>
+        <img [src]="moreBuses" (click)="gotoRouteDetails(route.routeCode)" />
+      </div>
+      <div class="route-summary">
+        <div class="total">
+          <span>
+            <p>Total POS Trxn Count</p>
+            <p>
+              {{
+              route.totalTxnCount ? (route.totalTxnCount | numberFormat) : '-'
+              }}
+            </p>
+          </span>
+          <span>
+            <p>Total POS Pass Count</p>
+            <p>
+              {{
+              route.totalPassCount
+              ? (route.totalPassCount | numberFormat)
+              : '-'
+              }}
+            </p>
+          </span>
+          <span>
+            <p>Total POS Sales</p>
+            <p>
+              {{ route.totalSales ? (route.totalSales| currencyFormat) : '-' }}
+            </p>
+          </span>
+        </div>
+        <div class="graph">
+          <app-line-graph [displayLabel]="false" [hourlyData]="route?.hourlyData"></app-line-graph>
+        </div>
+      </div>
+      <div class="buses">
+        <p>Buses on Duty</p>
+        <div class="list">
+          <ul>
+            <li class="bus" *ngFor="let bus of paginatedBuses(i)">
+              <app-bus-card [busDetails]="bus"></app-bus-card>
+            </li>
+            <li *ngIf="paginatedBuses(i).length === 1"></li>
+          </ul>
+          <button class="next" (click)="nextBuses(i)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>

@@ -1,0 +1,49 @@
+@import '../../../../styles.scss';
+
+.zreading-list {
+  @apply bg-slate-200;
+  height: 25rem;
+  overflow: auto;
+  position: relative;
+  padding: 1rem;
+
+  .zreading {
+    @apply border border-gray-500;
+    border-radius: 0.5rem;
+    padding: 2rem 0 1rem;
+    position: relative;
+    text-align: center;
+    white-space: break-spaces;
+    font-size: 1.05rem;
+    font-family: 'Consolas';
+    background-color: #fff;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    > span {
+      @apply bg-sky-400;
+      padding: 0.5rem;
+      color: #fff;
+      border-radius: 0.5rem;
+
+      &.date-time {
+        left: auto;
+        right: 0;
+      }
+
+      &.z-read {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+      }
+
+      &.date-time {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+      }
+    }
+  }
+}

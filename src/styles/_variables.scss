@@ -1,0 +1,36 @@
+// Variables
+$primary-blue: #104a69;
+$nav-blue: #2e5f7B;
+$hover: #d3e2ea;
+$row-new: #a9d2ed;
+$bg-active: #35a800;
+$bg-inactive: #c41f1f;
+$brt-border: #829ea2;
+$brt-background: #d3e2eb;
+$tran-count: #84bbe2;
+$pass-count: #ebc075;
+$cctv-enter: #70cb96;
+$cctv-exit: #9e2c2c;
+$off-white: #eef2f4;
+$brt-button: #16bdd9;
+$brt-button-red: #B50102;
+$checked: #0bd861;
+$shadow: #00000029;
+$register: #079047;
+$edit: #F69F00;
+$gray: #707071;
+
+// Status
+$active: #0CE571;
+$inactive: #FA3232;
+
+// Bus Transaction Colors
+$bus-blue: #4587aa; // < 15 min
+$bus-green: #63ba93; // > 15 min, < 30 min
+$bus-yellow: #c7983d; // > 30 min, < 1 hr
+$bus-orange: #e56d21; // > 1 hr
+$bus-violet: #4c425f; // timed out
+$bus-red: #c15274; // no route
+
+// urls
+$asset-url: '../../../assets/img';

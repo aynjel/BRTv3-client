@@ -1,0 +1,10 @@
+<p class="header">Total Summary</p>
+<div class="statistics">
+  <!-- <app-loading-spinner></app-loading-spinner> -->
+  <div class="bus-stats" *ngFor="let section of busStatItem | slice: 0:3; let i = index">
+    <div class="detail" *ngFor="let item of busStatItem.slice(i * 3, i * 3 + 3)">
+      <span class="detail-label">{{ item.label }}</span>
+      <span class="detail-data">{{ item.currency ? (item.value | currencyFormat) : (item.value | numberFormat) }}</span>
+    </div>
+  </div>
+</div>
